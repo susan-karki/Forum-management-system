@@ -4,13 +4,16 @@ const app = express()
 
 app.set('viwe engine', 'ejs')
 app.get('/', (req, res)=>{
-    const name = "Susan Karki"
-    res.render("home.ejs", {data:name})
+    res.render("home.ejs")
 })
-app.get('/about', (req, res)=>{
-    res.render("about.ejs")
+app.get('/register', (req, res)=>{
+    res.render("auth/Register.ejs")
 })
-
-app.listen(3000, ()=>{
-    console.log('Projest has been started at port no 3000')
+app.get('/login', (req, res)=>{
+    res.render("auth/Login.ejs")
+})
+app.use(express.static('public/css/'))
+const PORT = 3000
+app.listen(PORT, ()=>{
+    console.log('Projest has been started at port no' + PORT)
 })
