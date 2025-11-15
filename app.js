@@ -1,14 +1,28 @@
 const express = require('express')
+const { users } = require('./model/index')
 const app = express()
 
 require("./model/index")
+app.use(express.urlencoded({extended : true}))
+app.use(express.json())
 
-app.set('viwe engine', 'ejs')
+app.set('view engine', 'ejs')
+
 app.get('/', (req, res)=>{
     res.render("home.ejs")
 })
-app.get('/register', (req, res)=>{
+app.get("/register", (req, res)=>{
     res.render("auth/Register.ejs")
+})
+app.post("/register", async(req, res)=>{
+   const{username, password, email} = req.body
+
+   await users.create({
+    username,
+    password,
+    email
+   })
+   res.send("Registered successfully")
 })
 app.get('/login', (req, res)=>{
     res.render("auth/Login.ejs")
