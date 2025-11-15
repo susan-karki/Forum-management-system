@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 
+require("./model/index")
 
 app.set('viwe engine', 'ejs')
 app.get('/', (req, res)=>{
